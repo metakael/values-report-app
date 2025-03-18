@@ -1,17 +1,25 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
-
+// src/pages/index.tsx
 export default function IndexPage() {
-  const router = useRouter();
-  
-  useEffect(() => {
-    router.push('/access');
-  }, [router]);
-  
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Values Report Application</h1>
-      <p>Loading the application...</p>
+      <p>Welcome to the Values Report app. Please click the button below to begin.</p>
+      <div style={{ marginTop: '1.5rem' }}>
+        <a 
+          href="/access" 
+          style={{
+            display: 'inline-block',
+            padding: '0.75rem 1.5rem',
+            backgroundColor: '#4F46E5',
+            color: 'white',
+            textDecoration: 'none',
+            borderRadius: '0.375rem',
+            fontWeight: 'bold'
+          }}
+        >
+          Start Assessment
+        </a>
+      </div>
     </div>
   );
 }
