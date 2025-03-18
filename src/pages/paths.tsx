@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 export default function PathsPage() {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   
   // Check if user is authenticated
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function PathsPage() {
     }
   }, [router]);
 
-  const handlePathSelection = async (path) => {
+  const handlePathSelection = async (path: 'direct' | 'sort') => {
     setIsLoading(true);
     
     // Store the selected path
