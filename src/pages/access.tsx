@@ -1,5 +1,5 @@
+// src/pages/access.tsx
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import React from 'react';
 
 export default function AccessPage() {
@@ -7,18 +7,11 @@ export default function AccessPage() {
   const [accessCode, setAccessCode] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
-    if (!email || !accessCode) {
-      setError('Email and access code are required');
-      setLoading(false);
-      return;
-    }
 
     try {
       const response = await fetch('/api/auth', {
@@ -32,16 +25,16 @@ export default function AccessPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Verification failed. Please try again.');
+        throw new Error(data.message || 'Verification failed');
       }
 
-      // Store authentication state in localStorage
+      // Store authentication data
       localStorage.setItem('authenticated', 'true');
       localStorage.setItem('userEmail', email);
       localStorage.setItem('sessionId', data.sessionId);
 
-      // Redirect to path selection
-      router.push('/paths');
+      // Navigate using window.location for reliability
+      window.location.href = '/paths';
     } catch (error: any) {
       console.error('Authentication error:', error);
       setError(error.message || 'An unexpected error occurred');
