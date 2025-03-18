@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import React from 'react';
 
 export default function AccessPage() {
-  const [email, setEmail] = useState('');
-  const [accessCode, setAccessCode] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [accessCode, setAccessCode] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError('');
     setLoading(true);
@@ -41,7 +42,7 @@ export default function AccessPage() {
 
       // Redirect to path selection
       router.push('/paths');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Authentication error:', error);
       setError(error.message || 'An unexpected error occurred');
     } finally {
@@ -73,7 +74,7 @@ export default function AccessPage() {
           <input 
             type="email" 
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             placeholder="Enter your email"
             style={{
               width: '100%',
@@ -92,7 +93,7 @@ export default function AccessPage() {
           <input 
             type="text" 
             value={accessCode}
-            onChange={(e) => setAccessCode(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAccessCode(e.target.value)}
             placeholder="Enter access code"
             style={{
               width: '100%',
