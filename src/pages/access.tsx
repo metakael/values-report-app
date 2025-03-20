@@ -1,4 +1,4 @@
-// src/pages/access.tsx (simplified version)
+// src/pages/access.tsx (updated Link implementation)
 import { useState } from 'react';
 import React from 'react';
 import Link from 'next/link';
@@ -44,8 +44,10 @@ export default function AccessPage() {
           Authentication successful!
         </div>
         <p>You have been verified with access code: {accessCode}</p>
+        
+        {/* Updated Link implementation */}
         <Link href="/paths">
-          <a style={{
+          <span style={{
             display: 'inline-block',
             padding: '0.75rem 1.5rem',
             backgroundColor: '#4F46E5',
@@ -53,11 +55,29 @@ export default function AccessPage() {
             textDecoration: 'none',
             borderRadius: '0.375rem',
             fontWeight: 'bold',
-            marginTop: '1rem'
+            marginTop: '1rem',
+            cursor: 'pointer'
           }}>
             Continue to Path Selection
-          </a>
+          </span>
         </Link>
+        
+        {/* Fallback button in case Link doesn't work */}
+        <div style={{ marginTop: '1rem' }}>
+          <button 
+            onClick={() => window.location.href = '/paths'}
+            style={{
+              padding: '0.5rem 1rem',
+              backgroundColor: '#6B7280',
+              color: 'white',
+              border: 'none',
+              borderRadius: '0.25rem',
+              cursor: 'pointer'
+            }}
+          >
+            Alternative: Click here if the button above doesn't work
+          </button>
+        </div>
       </div>
     );
   }
